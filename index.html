@@ -355,36 +355,38 @@
 
     <figure class="p-figure">
       <div class="split">
-        <svg viewBox="0 0 196 340" role="img" aria-label="거래 상태 전이 5단계">
+        <svg viewBox="0 0 196 366" role="img" aria-label="트랜잭션 단계 설계: 거래 상태 전이 5단계">
           <defs>
             <marker id="a2" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
               <path d="M0 0 L8 4 L0 8 z" fill="#94a3b8"/>
             </marker>
           </defs>
 
-          <rect class="dgm-box" x="8" y="22" width="180" height="48" rx="2"/>
-          <text class="dgm-k" x="98" y="43" text-anchor="middle">OPENED</text>
-          <text class="dgm-t" x="98" y="61" text-anchor="middle">거래 시작</text>
-          <line class="dgm-l" x1="98" y1="70" x2="98" y2="86" marker-end="url(#a2)"/>
+          <text class="dgm-b" x="98" y="14" text-anchor="middle">트랜잭션 단계 설계</text>
 
-          <rect class="dgm-box" x="8" y="88" width="180" height="48" rx="2"/>
-          <text class="dgm-k" x="98" y="109" text-anchor="middle">IDENTIFIED</text>
-          <text class="dgm-t" x="98" y="127" text-anchor="middle">품목 확인</text>
-          <line class="dgm-l" x1="98" y1="136" x2="98" y2="152" marker-end="url(#a2)"/>
+          <rect class="dgm-box" x="8" y="48" width="180" height="48" rx="2"/>
+          <text class="dgm-k" x="98" y="69" text-anchor="middle">OPENED</text>
+          <text class="dgm-t" x="98" y="87" text-anchor="middle">거래 시작</text>
+          <line class="dgm-l" x1="98" y1="96" x2="98" y2="112" marker-end="url(#a2)"/>
 
-          <rect class="dgm-box" x="8" y="154" width="180" height="48" rx="2"/>
-          <text class="dgm-k" x="98" y="175" text-anchor="middle">CHECKED</text>
-          <text class="dgm-t" x="98" y="193" text-anchor="middle">서버가 가격 판정</text>
-          <line class="dgm-l" x1="98" y1="202" x2="98" y2="218" marker-end="url(#a2)"/>
+          <rect class="dgm-box" x="8" y="114" width="180" height="48" rx="2"/>
+          <text class="dgm-k" x="98" y="135" text-anchor="middle">IDENTIFIED</text>
+          <text class="dgm-t" x="98" y="153" text-anchor="middle">품목 확인</text>
+          <line class="dgm-l" x1="98" y1="162" x2="98" y2="178" marker-end="url(#a2)"/>
 
-          <rect class="dgm-box-on" x="8" y="220" width="180" height="48" rx="2"/>
-          <text class="dgm-k" x="98" y="241" text-anchor="middle">PAYING</text>
-          <text class="dgm-b" x="98" y="259" text-anchor="middle">되돌릴 수 없는 지점</text>
-          <line class="dgm-l" x1="98" y1="268" x2="98" y2="284" marker-end="url(#a2)"/>
+          <rect class="dgm-box" x="8" y="180" width="180" height="48" rx="2"/>
+          <text class="dgm-k" x="98" y="201" text-anchor="middle">CHECKED</text>
+          <text class="dgm-t" x="98" y="219" text-anchor="middle">서버가 가격 판정</text>
+          <line class="dgm-l" x1="98" y1="228" x2="98" y2="244" marker-end="url(#a2)"/>
 
-          <rect class="dgm-box" x="8" y="286" width="180" height="48" rx="2"/>
-          <text class="dgm-k" x="98" y="307" text-anchor="middle">PURCHASED</text>
-          <text class="dgm-t" x="98" y="325" text-anchor="middle">구매 기록</text>
+          <rect class="dgm-box-on" x="8" y="246" width="180" height="48" rx="2"/>
+          <text class="dgm-k" x="98" y="267" text-anchor="middle">PAYING</text>
+          <text class="dgm-b" x="98" y="285" text-anchor="middle">결제</text>
+          <line class="dgm-l" x1="98" y1="294" x2="98" y2="310" marker-end="url(#a2)"/>
+
+          <rect class="dgm-box" x="8" y="312" width="180" height="48" rx="2"/>
+          <text class="dgm-k" x="98" y="333" text-anchor="middle">PURCHASED</text>
+          <text class="dgm-t" x="98" y="351" text-anchor="middle">구매 기록</text>
         </svg>
 
         <img src="images/02-shopping.png" alt="FronyShopping 콘솔의 거래 상세 화면 — 상태 전이 타임라인, 품목별 허용 가격과 실제 가격, 호출 로그" loading="lazy">
