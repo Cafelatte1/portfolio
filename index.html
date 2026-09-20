@@ -68,51 +68,25 @@
 
   /* ---------- 히어로 ---------- */
   .hero { padding: 80px 0 56px; border-bottom: 1px solid var(--line); }
-  .eyebrow {
-    font-family: var(--mono); font-size: 12px; letter-spacing: .14em;
-    text-transform: uppercase; color: var(--faint); margin: 0 0 20px;
-  }
+  .hero .wrap { display: flex; align-items: baseline; flex-wrap: wrap; gap: 14px; }
   .hero h1 {
     font-size: clamp(34px, 7vw, 46px); line-height: 1.2;
     margin: 0; color: var(--navy-deep); letter-spacing: -.02em;
   }
   .hero .role {
-    margin: 10px 0 0; font-size: 17px; font-weight: 600; color: var(--accent);
+    margin: 0; font-size: 17px; font-weight: 600; color: var(--accent);
   }
-  .hero .tagline {
-    margin: 24px 0 0; font-size: 18px; line-height: 1.8; color: var(--ink);
-    max-width: 34em;
-  }
-  .links { display: flex; flex-wrap: wrap; gap: 8px; margin: 32px 0 0; padding: 0; list-style: none; }
-  .links a {
-    display: inline-block; padding: 7px 14px;
-    border: 1px solid var(--line); border-radius: 999px;
-    font-size: 13px; color: var(--muted); background: var(--bg);
-  }
-  .links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
-
-  .focus { margin: 44px 0 0; display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
-  .focus > div { background: var(--bg-soft); padding: 18px 20px; }
-  .focus dt {
-    font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
-    color: var(--faint); text-transform: uppercase; margin: 0 0 6px;
-  }
-  .focus dd { margin: 0; font-size: 14.5px; line-height: 1.65; color: var(--ink); }
-  @media (min-width: 680px) { .focus { grid-template-columns: repeat(3, 1fr); } }
 
   /* ---------- 프로젝트 ---------- */
   .project { padding: 72px 0; border-bottom: 1px solid var(--line); }
   .project:last-of-type { border-bottom: 0; }
 
   .p-head { margin-bottom: 40px; }
-  .p-num {
-    font-family: var(--mono); font-size: 13px; font-weight: 500;
-    color: var(--accent); letter-spacing: .08em;
-  }
   .p-head h2 {
     font-size: clamp(23px, 4.4vw, 29px); line-height: 1.38;
-    margin: 10px 0 0; color: var(--navy-deep); letter-spacing: -.015em;
+    margin: 0; color: var(--navy-deep); letter-spacing: -.015em;
   }
+  .p-num { font-family: var(--mono); font-weight: 500; color: var(--accent); }
   .p-org {
     margin: 12px 0 0; font-size: 14px; color: var(--muted);
   }
@@ -125,14 +99,10 @@
 
   .block { margin-top: 36px; }
   .block > h3 {
-    display: flex; align-items: baseline; gap: 10px;
     margin: 0 0 14px; padding-bottom: 10px;
     border-bottom: 1px solid var(--line-soft);
-    font-size: 14px; color: var(--navy);
-  }
-  .block > h3 .en {
-    font-family: var(--mono); font-size: 11px; letter-spacing: .12em;
-    color: var(--faint); font-weight: 500;
+    font-family: var(--mono); font-size: 12px; font-weight: 500;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--accent);
   }
   .block p { margin: 0 0 14px; }
   .block p:last-child { margin-bottom: 0; }
@@ -257,33 +227,8 @@
 
 <header class="hero">
   <div class="wrap">
-    <p class="eyebrow">AI Engineer Portfolio</p>
     <h1>김영준</h1>
     <p class="role">AI Engineer</p>
-    <p class="tagline">
-      AI가 데모에서 멈추지 않고 <span class="hl">실제 업무를 끝까지 수행하도록</span> 만드는 일을 합니다.
-      모델을 붙이는 것보다, 모델이 틀릴 수 있다는 전제 위에서 시스템을 어떻게 설계할지를 먼저 생각합니다.
-    </p>
-
-    <ul class="links">
-      <li><a href="https://github.com/Cafelatte1">GitHub</a></li>
-      <li><a href="mailto:flash659@gmail.com">flash659@gmail.com</a></li>
-    </ul>
-
-    <dl class="focus">
-      <div>
-        <dt>RAG</dt>
-        <dd>B2B 고객사 대상 대화형 AI 서비스 구축과 커스터마이징</dd>
-      </div>
-      <div>
-        <dt>Agent / MCP</dt>
-        <dd>에이전트가 안전하게 일할 수 있는 도구와 프로토콜 설계</dd>
-      </div>
-      <div>
-        <dt>Data Pipeline</dt>
-        <dd>수집·정제·공급을 자동화해 서비스에 투입되는 파이프라인</dd>
-      </div>
-    </dl>
   </div>
 </header>
 
@@ -293,8 +238,7 @@
 <article class="project" id="p1">
   <div class="wrap">
     <div class="p-head">
-      <span class="p-num">01</span>
-      <h2>AI 학습용 부동산 데이터 파이프라인 구축 및 매출 전환</h2>
+      <h2><span class="p-num">01.</span> AI 학습용 부동산 데이터 파이프라인 구축 및 매출 전환</h2>
       <p class="p-org">㈜코그콤 · 고객사 ㈜젠스타메이트</p>
       <ul class="tags">
         <li>Python</li><li>Web Crawling</li><li>Browser Automation</li><li>REST API</li><li>Data Pipeline</li>
@@ -302,7 +246,7 @@
     </div>
 
     <section class="block">
-      <h3>상황 <span class="en">Situation</span></h3>
+      <h3>Situation</h3>
       <ul>
         <li>젠스타메이트 의뢰로 <strong>성북구청 건축 인허가 데이터</strong>를 AI 학습용으로 수집·공급하는 파이프라인을 맡았습니다.</li>
         <li>대상 사이트는 <span class="hl">정적 페이지와 동적 페이지가 뒤섞인 구조</span>였고, 수집한 데이터를 정제·표준화해 서비스에 공급하는 체계는 아예 없었습니다.</li>
@@ -310,7 +254,7 @@
     </section>
 
     <section class="block">
-      <h3>과제 <span class="en">Task</span></h3>
+      <h3>Task</h3>
       <ul>
         <li>하나의 수집 방식으로는 전체 데이터를 가져올 수 없었습니다. 정적·동적 혼재 구조를 모두 커버하는 수집 방법이 필요했습니다.</li>
         <li>수작업 수집으로는 정기 갱신이 불가능했습니다. AI 모델이 바로 쓸 수 있는 형태로 정제해 <strong>주기적으로 공급</strong>하는 파이프라인까지 만들어야 했습니다.</li>
@@ -318,7 +262,7 @@
     </section>
 
     <section class="block">
-      <h3>해결 <span class="en">Action</span></h3>
+      <h3>Action</h3>
       <ul>
         <li><strong>페이지 유형을 먼저 분류했습니다.</strong> DOM 구조·네트워크 요청·렌더링 방식을 직접 분석해 어떤 페이지가 서버에서 완성되어 오고 어떤 페이지가 브라우저에서 그려지는지 구분했습니다.</li>
         <li><strong>전면 브라우저 자동화를 쓰지 않았습니다.</strong> 모든 페이지를 브라우저로 여는 편이 구현은 쉽지만 속도와 리소스 비용이 큽니다. 정적 페이지는 HTTP 파싱으로, 동적 페이지만 브라우저 자동화로 처리하는 <span class="hl">하이브리드 크롤링 모듈</span>을 설계했습니다.</li>
@@ -342,23 +286,15 @@
     </section>
 
     <section class="block">
-      <h3>성과 <span class="en">Result</span></h3>
+      <h3>Result</h3>
       <ul class="results">
         <li>
           <h4>매출 전환</h4>
           <p>구축한 파이프라인이 젠스타메이트 서비스의 핵심 인프라로 투입되어 실제 매출로 이어졌습니다.</p>
         </li>
         <li>
-          <h4>월별 자동 수집</h4>
-          <p>배포 후 크롤링 모듈이 월 단위로 자동 실행되어, 별도 개입 없이 최신 데이터가 계속 쌓입니다.</p>
-        </li>
-        <li>
           <h4>내부 솔루션 연동</h4>
           <p>업무 자동화 솔루션 리컬럼과 연결되는 API 서버를 구축해 수집 데이터를 서비스에 직접 공급했습니다.</p>
-        </li>
-        <li>
-          <h4>비용 설계</h4>
-          <p>수집 방식을 페이지 유형별로 나눠, 전면 브라우저 자동화 대비 실행 시간과 리소스를 낮췄습니다.</p>
         </li>
       </ul>
     </section>
@@ -369,8 +305,7 @@
 <article class="project" id="p2">
   <div class="wrap">
     <div class="p-head">
-      <span class="p-num">02</span>
-      <h2>AI 에이전트가 개인정보를 보지 못한 채 결제까지 끝내는 구매 자동화</h2>
+      <h2><span class="p-num">02.</span> AI 에이전트 기반 이커머스 물품 구매 자동화 시스템 개발</h2>
       <p class="p-org">
         개인 프로젝트 ·
         <a href="https://github.com/Cafelatte1/FronyBrowser">FronyBrowser</a> ·
@@ -382,7 +317,7 @@
     </div>
 
     <section class="block">
-      <h3>상황 <span class="en">Situation</span></h3>
+      <h3>Situation</h3>
       <ul>
         <li>"늘 사던 그 물 주문해줘"를 에이전트에게 맡기려면 로그인 비밀번호, 카드번호, 결제 PIN이 필요합니다. 그런데 그 값을 에이전트에게 주는 순간 <span class="hl">LLM 컨텍스트·응답·로그에 전부 남습니다.</span></li>
         <li>더 근본적인 문제는 에이전트가 <strong>웹페이지에 의해 인젝션당할 수 있다</strong>는 점이었습니다. 화면에 적힌 가격과 수량을 그대로 믿고 결제하면, 조작된 페이지 하나로 잘못된 주문이 나갑니다.</li>
@@ -390,7 +325,7 @@
     </section>
 
     <section class="block">
-      <h3>과제 <span class="en">Task</span></h3>
+      <h3>Task</h3>
       <ul>
         <li>에이전트가 개인정보 값을 <strong>단 한 번도 보지 않으면서</strong> 로그인부터 결제 완료까지 완주하게 만들 것.</li>
         <li>에이전트가 오염되더라도 피해가 한도 안에 묶이도록, <strong>판단의 권한을 에이전트 밖에</strong> 둘 것.</li>
@@ -398,7 +333,7 @@
     </section>
 
     <section class="block">
-      <h3>해결 <span class="en">Action</span></h3>
+      <h3>Action</h3>
       <ul>
         <li>
           <strong>값이 나가는 길을 하나로 좁혔습니다.</strong>
@@ -457,7 +392,7 @@
     </section>
 
     <section class="block">
-      <h3>성과 <span class="en">Result</span></h3>
+      <h3>Result</h3>
 
       <div class="metrics">
         <div><span class="num">20,595</span><span class="cap">TypeScript 라인</span></div>
@@ -475,29 +410,9 @@
           <h4>설계가 작동한 증거</h4>
           <p>감사 로그 1,183건 중 스크러버가 172건을 실제로 잡아냈습니다. 대부분 사이트가 배송지 이름·전화를 본문에 그려 넣은 경우였습니다.</p>
         </li>
-        <li>
-          <h4>규칙을 테스트로 고정</h4>
-          <p>배치를 정하지 않은 핸들러가 조용히 에이전트에 노출되지 않도록, 도구 노출 목록 자체를 테스트와 기동 시점 검사로 묶었습니다.</p>
-        </li>
-        <li>
-          <h4>오픈소스 공개</h4>
-          <p>FronyBrowser를 MIT 라이선스로 공개하고 npm·MCP Registry에 등록했습니다.</p>
-        </li>
       </ul>
     </section>
 
-    <section class="block">
-      <h3>돌아보며 <span class="en">Reflection</span></h3>
-      <p>
-        가장 오래 고민한 건 기능이 아니라 <strong>무엇을 넣지 않을 것인가</strong>였습니다.
-        임의 JS 실행, HTML 덤프, 콘솔 조회는 전부 편리하지만 하나같이 방어를 우회하는 길이 됩니다.
-        기능을 더하는 판단보다 거절하는 판단이 시스템의 성격을 정한다는 걸 배웠습니다.
-      </p>
-      <p>
-        결제 승인 토큰을 <span class="hl">검증 시점이 아니라 성공 시점에 소진</span>하도록 바꾼 것도 같은 맥락이었습니다.
-        검증 때 태우면 실패한 입력 하나가 토큰을 날려버립니다. 실제로 겪고 나서야 고친 부분입니다.
-      </p>
-    </section>
   </div>
 </article>
 
@@ -505,10 +420,9 @@
 <article class="project" id="p3">
   <div class="wrap">
     <div class="p-head">
-      <span class="p-num">03</span>
-      <h2>이미지로만 존재하던 공고를 검색 가능한 데이터로 — 이벤트 분석 MCP 서버</h2>
+      <h2><span class="p-num">03.</span> 한국투자증권 이벤트 수집 모듈 개발 및 MCP 서버 구축</h2>
       <p class="p-org">
-        현업 협업 프로젝트 · 한국투자증권 공개 이벤트 페이지 대상 ·
+        현업 실무자와 함께 진행한 협업 프로젝트 ·
         <a href="https://github.com/Cafelatte1/project-kisevent">project-kisevent</a>
       </p>
       <ul class="tags">
@@ -517,16 +431,16 @@
     </div>
 
     <section class="block">
-      <h3>상황 <span class="en">Situation</span></h3>
+      <h3>Situation</h3>
       <ul>
-        <li>현업에서 "지금 영업점 고객 대상 이벤트가 뭐가 있지?"에 답하려면 공고를 하나씩 열어 눈으로 읽어야 했습니다.</li>
+        <li><strong>현업 실무자가 직접 겪던 불편에서 출발했습니다.</strong> "지금 영업점 고객 대상 이벤트가 뭐가 있지?"에 답하려면 공고를 하나씩 열어 눈으로 읽어야 했습니다. 어떤 정보가 실제로 필요한지, 대상 구분을 어떻게 나눠야 맞는지를 <span class="hl">실무자와 함께 정의하며 진행했습니다.</span></li>
         <li>원인은 단순했습니다. <span class="hl">공고 내용이 전부 배너 이미지 안에 있고 HTML에는 텍스트가 없습니다.</span> 배너는 세로 7,175~29,482px, 34건 합계 약 67MB였습니다.</li>
         <li>목록의 탭 구분(영업점 / 뱅키스)으로 대상을 가리는 방법도 틀렸습니다. 연금 이벤트가 양쪽 탭에 동시에 실려 오분류됐습니다.</li>
       </ul>
     </section>
 
     <section class="block">
-      <h3>과제 <span class="en">Task</span></h3>
+      <h3>Task</h3>
       <ul>
         <li>이미지 안의 기간·대상·상품·실적 조건을 구조화해, <strong>에이전트가 자연어 질문에 바로 답할 수 있게</strong> 만들 것.</li>
         <li>사내 개인 PC에서 도는 환경이므로 <strong>외부 API 키 없이</strong> 동작할 것.</li>
@@ -534,7 +448,7 @@
     </section>
 
     <section class="block">
-      <h3>해결 <span class="en">Action</span></h3>
+      <h3>Action</h3>
       <ul>
         <li>
           <strong>처음 설계는 전문 전사였고, 그걸 버렸습니다.</strong>
@@ -575,7 +489,7 @@
     </section>
 
     <section class="block">
-      <h3>성과 <span class="en">Result</span></h3>
+      <h3>Result</h3>
 
       <div class="metrics">
         <div><span class="num">53/53</span><span class="cap">정보 블록 검출</span></div>
@@ -593,26 +507,9 @@
           <h4>오분류 교정</h4>
           <p>목록 탭 기준으로는 잘못 잡히던 11건을 이미지 판정이 바로잡았습니다. 전부 양쪽 탭에 걸쳐 있던 연금 이벤트였습니다.</p>
         </li>
-        <li>
-          <h4>비개발자 설치</h4>
-          <p>설치 문서를 사람이 아닌 에이전트가 읽는 지시문으로 작성해, "셋팅해줘" 한마디로 설치가 끝나게 만들었습니다.</p>
-        </li>
-        <li>
-          <h4>이틀 만에 동작</h4>
-          <p>프로토타입부터 설치 스크립트까지 약 18시간, 커밋 32개로 완성했습니다.</p>
-        </li>
       </ul>
     </section>
 
-    <section class="block">
-      <h3>돌아보며 <span class="en">Reflection</span></h3>
-      <p>
-        가장 큰 결정은 <strong>공들여 만든 v1을 지운 것</strong>이었습니다.
-        타일 분할은 문장이 잘리지 않게 여백을 찾아 자르는 알고리즘까지 만들어 둔 상태였습니다.
-        그래도 "정보가 어디 있는지" 20건을 직접 세어 보니 훨씬 단순한 답이 있었습니다.
-        측정하기 전에 설계를 확정하면 정교한 방향으로 잘못 갈 수 있다는 걸 배웠습니다.
-      </p>
-    </section>
   </div>
 </article>
 
