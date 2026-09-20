@@ -120,7 +120,8 @@
     font-size: clamp(20px, 3.4vw, 25px); line-height: 1.55; font-weight: 700;
     color: var(--navy-deep); margin: 0 0 22px; letter-spacing: -.015em;
   }
-  .about p { margin: 0; font-size: 16px; line-height: 1.9; color: var(--ink); }
+  .about p { margin: 0 0 16px; font-size: 16px; line-height: 1.9; color: var(--ink); }
+  .about p:last-child { margin-bottom: 0; }
 
   /* 대표 이미지 */
   .p-figure { margin: 0 0 40px; }
@@ -192,10 +193,13 @@
 
     <p class="lead">모델이 아니라, 모델이 딛고 설 바닥을 만듭니다.</p>
     <p>
-      AI가 일하려면 먼저 바탕이 있어야 합니다. 학습할 데이터, 안전하게 행동할 수 있는 도구,
-      읽을 수 없던 것을 읽는 경로. 저는 그 바탕을 만듭니다.
-      만드는 동안 늘 같은 질문을 합니다 — <span class="hl">편한 길 대신 이 길을 택한 이유를 댈 수 있는가.</span>
-      아래 세 프로젝트는 그 질문에 답한 기록입니다.
+      AI가 일하려면 먼저 쓸 데이터가 있어야 하고, 마음대로 눌러도 되는 자리와
+      안 되는 자리가 갈려 있어야 합니다. 저는 주로 그쪽을 맡아 왔습니다.
+    </p>
+    <p>
+      아래 세 프로젝트에는 전부 더 쉬운 길이 있었습니다. 전부 Selenium으로 열거나,
+      결제 판단을 에이전트에게 맡기거나, 배너 이미지를 통째로 모델에 넘기면 됐습니다.
+      <span class="hl">그러지 않은 이유</span>를 프로젝트마다 적어뒀습니다.
     </p>
   </div>
 </article>
@@ -251,8 +255,6 @@
       </svg>
       <figcaption>요청을 받으면 그 자리에서 페이지 유형을 갈라 수집하고 정제해 응답합니다. 비용이 큰 브라우저 경로는 꼭 필요한 페이지에만 씁니다.</figcaption>
     </figure>
-
-    </div>
 
     <section class="block">
       <h3>Situation</h3>
