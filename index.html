@@ -109,6 +109,13 @@
     background: var(--bg-tint); padding: 2px 5px; border-radius: 3px; color: var(--navy);
   }
 
+  /* 자기소개 */
+  .about .lead {
+    font-size: clamp(20px, 3.4vw, 25px); line-height: 1.55; font-weight: 700;
+    color: var(--navy-deep); margin: 0 0 22px; letter-spacing: -.015em;
+  }
+  .about p { margin: 0; font-size: 16px; line-height: 1.9; color: var(--ink); }
+
   /* 대표 이미지 */
   .p-figure { margin: 0 0 40px; }
   .p-figure img, .p-figure svg {
@@ -220,6 +227,7 @@
   <div class="wrap">
     <h1 class="me">김영준 AI Engineer's Portfolio</h1>
     <nav>
+      <a href="#p0">00</a>
       <a href="#p1">01</a>
       <a href="#p2">02</a>
       <a href="#p3">03</a>
@@ -228,6 +236,24 @@
 </div>
 
 <main>
+
+<!-- ============ 00 ============ -->
+<article class="project about" id="p0">
+  <div class="wrap">
+    <div class="p-head">
+      <h2><span class="p-num">00.</span> About</h2>
+    </div>
+
+    <p class="lead">AI에게 일을 맡길 수 있게 만듭니다.</p>
+    <p>
+      AI가 학습할 데이터를 공급하는 일에서 시작해, 고객사 RAG 서비스를 거쳐, 지금은 에이전트가 직접 행동하는 도구를 만듭니다.
+      맡기는 권한이 커질수록 필요했던 건 더 좋은 모델이 아니라 <span class="hl">더 분명한 경계</span>였습니다.
+      그래서 모델이 틀리고 오염될 수 있다는 전제에서 무엇을 주지 <em>않을지</em>를 먼저 정하고,
+      그 규칙을 사람의 약속이 아니라 타입과 테스트로 강제합니다.
+      아래 세 프로젝트는 각각 <strong>데이터 · 권한 · 판단</strong>을 맡긴 기록입니다.
+    </p>
+  </div>
+</article>
 
 <!-- ============ 01 ============ -->
 <article class="project" id="p1">
