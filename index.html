@@ -109,13 +109,29 @@
     background: var(--bg-tint); padding: 2px 5px; border-radius: 3px; color: var(--navy);
   }
 
+  /* 대표 이미지 */
+  .p-figure { margin: 0 0 40px; }
+  .p-figure img, .p-figure svg {
+    display: block; width: 100%; height: auto;
+    border: 1px solid var(--line); background: var(--bg-soft);
+  }
+  .p-figure figcaption { margin-top: 10px; font-size: 12.5px; line-height: 1.6; color: var(--muted); }
+  .dgm-box { fill: #fff; stroke: var(--line); }
+  .dgm-box-on { fill: #eef4fa; stroke: var(--accent); }
+  .dgm-box-off { fill: var(--bg-tint); stroke: var(--line); stroke-dasharray: 3 3; }
+  .dgm-t { font-family: var(--sans); font-size: 13px; fill: var(--ink); }
+  .dgm-b { font-family: var(--sans); font-size: 13px; font-weight: 600; fill: var(--navy-deep); }
+  .dgm-s { font-family: var(--sans); font-size: 11.5px; fill: var(--muted); }
+  .dgm-k { font-family: var(--mono); font-size: 10.5px; fill: var(--faint); letter-spacing: .1em; }
+  .dgm-l { stroke: var(--faint); fill: none; }
+
   /* 성과 카드 */
-  .results { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
-  .results li {
+  .results { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; align-items: stretch; }
+  .block ul.results li {
     padding: 18px 20px; border: 1px solid var(--line); border-left: 3px solid var(--accent);
     background: var(--bg-soft); margin: 0;
   }
-  .results li::before { display: none; }
+  .block ul.results li::before { display: none; }
   .results h4 { margin: 0 0 6px; font-size: 14.5px; color: var(--navy-deep); }
   .results p { margin: 0; font-size: 14.5px; color: var(--muted); line-height: 1.68; }
   @media (min-width: 680px) { .results { grid-template-columns: 1fr 1fr; } }
@@ -224,6 +240,46 @@
       </ul>
     </div>
 
+    <figure class="p-figure">
+      <svg viewBox="0 0 732 322" role="img" aria-label="정적·동적 페이지를 나눠 처리하는 하이브리드 크롤링 구조">
+        <defs>
+          <marker id="a1" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0 0 L8 4 L0 8 z" fill="#94a3b8"/>
+          </marker>
+        </defs>
+
+        <rect class="dgm-box" x="16" y="22" width="180" height="58" rx="2"/>
+        <text class="dgm-b" x="106" y="46" text-anchor="middle">대상 사이트</text>
+        <text class="dgm-s" x="106" y="65" text-anchor="middle">정적 · 동적 페이지 혼재</text>
+
+        <line class="dgm-l" x1="200" y1="51" x2="232" y2="51" marker-end="url(#a1)"/>
+
+        <rect class="dgm-box-on" x="240" y="22" width="216" height="58" rx="2"/>
+        <text class="dgm-b" x="348" y="46" text-anchor="middle">DOM · 네트워크 · 렌더링 분석</text>
+        <text class="dgm-s" x="348" y="65" text-anchor="middle">페이지 유형 판별</text>
+
+        <path class="dgm-l" d="M348 80 V104 H150 V128" marker-end="url(#a1)"/>
+        <path class="dgm-l" d="M348 80 V104 H546 V128" marker-end="url(#a1)"/>
+
+        <rect class="dgm-box" x="40" y="136" width="220" height="74" rx="2"/>
+        <text class="dgm-k" x="150" y="158" text-anchor="middle">STATIC</text>
+        <text class="dgm-b" x="150" y="179" text-anchor="middle">HTTP 파싱</text>
+        <text class="dgm-s" x="150" y="197" text-anchor="middle">빠르고 가볍다</text>
+
+        <rect class="dgm-box" x="436" y="136" width="220" height="74" rx="2"/>
+        <text class="dgm-k" x="546" y="158" text-anchor="middle">DYNAMIC</text>
+        <text class="dgm-b" x="546" y="179" text-anchor="middle">브라우저 자동화</text>
+        <text class="dgm-s" x="546" y="197" text-anchor="middle">느리고 비싸다</text>
+
+        <path class="dgm-l" d="M150 210 V236 H348 V258" marker-end="url(#a1)"/>
+        <path class="dgm-l" d="M546 210 V236 H348" fill="none"/>
+
+        <rect class="dgm-box-on" x="196" y="266" width="304" height="46" rx="2"/>
+        <text class="dgm-b" x="348" y="295" text-anchor="middle">정제 · 표준화 → DB 적재 → API 서버</text>
+      </svg>
+      <figcaption>전면 브라우저 자동화 대신 페이지 유형을 먼저 나눴습니다. 비용이 큰 경로는 꼭 필요한 페이지에만 씁니다.</figcaption>
+    </figure>
+
     <section class="block">
       <h3>Situation</h3>
       <ul>
@@ -294,6 +350,11 @@
         <li>TypeScript</li><li>MCP</li><li>Playwright/CDP</li><li>HMAC</li><li>SQLite</li><li>DPAPI</li>
       </ul>
     </div>
+
+    <figure class="p-figure">
+      <img src="images/02-shopping.png" alt="FronyShopping 콘솔의 거래 상세 화면 — 상태 전이 타임라인, 품목별 허용 가격과 실제 가격, 호출 로그" loading="lazy">
+      <figcaption>실제 구매 거래 기록. 상단 타임라인이 <strong>Opened → Item verified → Price checked → Paying → Purchased</strong> 순으로 남고, 품목마다 허용 가격 범위와 실제 본 가격이 함께 기록됩니다.</figcaption>
+    </figure>
 
     <section class="block">
       <h3>Situation</h3>
@@ -408,6 +469,56 @@
         <li>Python</li><li>MCP</li><li>VLM</li><li>FastAPI</li><li>SQLite</li><li>Pillow</li>
       </ul>
     </div>
+
+    <figure class="p-figure">
+      <svg viewBox="0 0 732 300" role="img" aria-label="배너 상단에 정보가 몰려 있음을 측정해 전문 전사를 크롭 한 장으로 줄인 과정">
+        <defs>
+          <marker id="a3" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0 0 L8 4 L0 8 z" fill="#94a3b8"/>
+          </marker>
+        </defs>
+
+        <text class="dgm-k" x="20" y="26">BANNER</text>
+        <rect x="20" y="40" width="46" height="230" class="dgm-box" rx="1"/>
+        <rect x="20" y="61" width="46" height="32" class="dgm-box-on" rx="1"/>
+        <line class="dgm-l" x1="66" y1="77" x2="92" y2="77"/>
+        <text class="dgm-s" x="20" y="288">세로 7,175 ~ 29,482px</text>
+        <text class="dgm-b" x="100" y="73">정보 4항목은 여기에</text>
+        <text class="dgm-s" x="100" y="91">y 1,400 ~ 3,450px</text>
+        <text class="dgm-s" x="100" y="200">나머지는 혜택 · 참여방법</text>
+        <text class="dgm-s" x="100" y="217">· 유의사항</text>
+
+        <line class="dgm-l" x1="270" y1="40" x2="270" y2="270"/>
+
+        <text class="dgm-k" x="300" y="26">MEASURED</text>
+        <rect class="dgm-box-on" x="300" y="40" width="180" height="58" rx="2"/>
+        <text class="dgm-b" x="390" y="64" text-anchor="middle">20건 전수 판독</text>
+        <text class="dgm-s" x="390" y="83" text-anchor="middle">상단 4,000px · 57타일</text>
+
+        <line class="dgm-l" x1="390" y1="98" x2="390" y2="128" marker-end="url(#a3)"/>
+
+        <rect class="dgm-box-off" x="300" y="136" width="180" height="60" rx="2"/>
+        <text class="dgm-k" x="390" y="157" text-anchor="middle">V1 — DROPPED</text>
+        <text class="dgm-s" x="390" y="177" text-anchor="middle">11~20 타일 전문 전사</text>
+        <text class="dgm-s" x="390" y="191" text-anchor="middle">40~50만 토큰</text>
+
+        <line class="dgm-l" x1="390" y1="196" x2="390" y2="216" marker-end="url(#a3)"/>
+
+        <rect class="dgm-box-on" x="300" y="224" width="180" height="46" rx="2"/>
+        <text class="dgm-b" x="390" y="252" text-anchor="middle">크롭 1장 · 호출 1회</text>
+
+        <line class="dgm-l" x1="510" y1="40" x2="510" y2="270"/>
+
+        <text class="dgm-k" x="540" y="26">RESULT</text>
+        <text class="dgm-b" x="540" y="66">53 / 53</text>
+        <text class="dgm-s" x="540" y="84">정보 블록 검출</text>
+        <text class="dgm-b" x="540" y="128">33 / 33</text>
+        <text class="dgm-s" x="540" y="146">진행 중 대상 판정</text>
+        <text class="dgm-b" x="540" y="190">11건</text>
+        <text class="dgm-s" x="540" y="208">탭 기준 오분류 교정</text>
+      </svg>
+      <figcaption>설계를 먼저 정하지 않고 20건을 직접 세어, 필요한 정보가 배너 상단 한 구간에 몰려 있음을 확인한 뒤 전사 경로를 버렸습니다.</figcaption>
+    </figure>
 
     <section class="block">
       <h3>Situation</h3>
