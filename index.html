@@ -53,8 +53,7 @@
   /* ---------- 상단 내비 ---------- */
   .topbar {
     position: sticky; top: 0; z-index: 20;
-    background: rgba(255,255,255,.88);
-    backdrop-filter: blur(8px);
+    background: var(--bg);
     border-bottom: 1px solid var(--line);
   }
   .topbar .wrap {
@@ -153,32 +152,6 @@
   .results p { margin: 0; font-size: 14.5px; color: var(--muted); line-height: 1.68; }
   @media (min-width: 680px) { .results { grid-template-columns: 1fr 1fr; } }
 
-  /* 다이어그램 */
-  .diagram {
-    margin: 0 0 40px; border: 1px solid var(--line); background: var(--bg-soft);
-    padding: 22px 20px;
-  }
-  .diagram .cap {
-    font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
-    text-transform: uppercase; color: var(--faint); margin: 0 0 16px;
-  }
-
-  /* 흐름 (가로) */
-  .flow { display: flex; flex-direction: column; align-items: stretch; gap: 6px; }
-  .flow .step {
-    text-align: center;
-    border: 1px solid var(--line); background: var(--bg);
-    padding: 12px 10px; font-size: 13px; line-height: 1.45; color: var(--ink);
-  }
-  .flow .step.on { border-color: var(--accent); background: #eef4fa; color: var(--navy-deep); font-weight: 600; }
-  .flow .sep { color: var(--faint); font-size: 13px; text-align: center; }
-  .flow .sep::before { content: '↓'; }
-  @media (min-width: 680px) {
-    .flow { flex-direction: row; align-items: center; gap: 8px; }
-    .flow .step { flex: 1 1 0; min-width: 0; }
-    .flow .sep::before { content: '→'; }
-  }
-
   /* ---------- 푸터 ---------- */
   footer {
     padding: 56px 0 72px; border-top: 1px solid var(--line);
@@ -190,7 +163,6 @@
 
   @media (max-width: 560px) {
     .topbar nav { gap: 14px; }
-    .hero { padding: 56px 0 40px; }
     .project { padding: 56px 0; }
   }
 </style>
@@ -241,7 +213,7 @@
     </div>
 
     <figure class="p-figure">
-      <svg viewBox="0 0 732 322" role="img" aria-label="정적·동적 페이지를 나눠 처리하는 하이브리드 크롤링 구조">
+      <svg viewBox="0 0 732 322" role="img" aria-label="요청을 받아 페이지 유형을 나눠 수집하고 응답까지 가는 흐름">
         <defs>
           <marker id="a1" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
             <path d="M0 0 L8 4 L0 8 z" fill="#94a3b8"/>
@@ -249,14 +221,14 @@
         </defs>
 
         <rect class="dgm-box" x="16" y="22" width="180" height="58" rx="2"/>
-        <text class="dgm-b" x="106" y="46" text-anchor="middle">대상 사이트</text>
-        <text class="dgm-s" x="106" y="65" text-anchor="middle">정적 · 동적 페이지 혼재</text>
+        <text class="dgm-b" x="106" y="46" text-anchor="middle">고객사 요청</text>
+        <text class="dgm-s" x="106" y="65" text-anchor="middle">FastAPI 수신</text>
 
         <line class="dgm-l" x1="200" y1="51" x2="232" y2="51" marker-end="url(#a1)"/>
 
         <rect class="dgm-box-on" x="240" y="22" width="216" height="58" rx="2"/>
         <text class="dgm-b" x="348" y="46" text-anchor="middle">DOM · 네트워크 · 렌더링 분석</text>
-        <text class="dgm-s" x="348" y="65" text-anchor="middle">페이지 유형 판별</text>
+        <text class="dgm-s" x="348" y="65" text-anchor="middle">정적 · 동적 혼재 페이지 판별</text>
 
         <path class="dgm-l" d="M348 80 V104 H150 V128" marker-end="url(#a1)"/>
         <path class="dgm-l" d="M348 80 V104 H546 V128" marker-end="url(#a1)"/>
@@ -277,22 +249,9 @@
         <rect class="dgm-box-on" x="196" y="266" width="304" height="46" rx="2"/>
         <text class="dgm-b" x="348" y="295" text-anchor="middle">정제 · 표준화 → 응답 반환</text>
       </svg>
-      <figcaption>전면 브라우저 자동화 대신 페이지 유형을 먼저 나눴습니다. 비용이 큰 경로는 꼭 필요한 페이지에만 씁니다.</figcaption>
+      <figcaption>요청을 받으면 그 자리에서 페이지 유형을 갈라 수집하고 정제해 응답합니다. 비용이 큰 브라우저 경로는 꼭 필요한 페이지에만 씁니다.</figcaption>
     </figure>
 
-    <div class="diagram">
-      <p class="cap">Request Flow</p>
-      <div class="flow">
-        <div class="step">고객사 요청<br>FastAPI 수신</div>
-        <span class="sep"></span>
-        <div class="step on">페이지 유형 분기</div>
-        <span class="sep"></span>
-        <div class="step on">수집<br>httpx / Selenium</div>
-        <span class="sep"></span>
-        <div class="step">정제 · 표준화</div>
-        <span class="sep"></span>
-        <div class="step">응답 반환</div>
-      </div>
     </div>
 
     <section class="block">
