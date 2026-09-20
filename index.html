@@ -3,15 +3,627 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>김영준 | AI Engineer</title>
+<title>김영준 | AI Engineer 포트폴리오</title>
+<meta name="description" content="AI 에이전트가 실제 업무를 수행하도록 만드는 시스템을 설계합니다. RAG 서비스, 개인정보 보호형 구매 자동화, 이미지 공고 구조화 파이프라인.">
+<meta property="og:title" content="김영준 | AI Engineer 포트폴리오">
+<meta property="og:description" content="AI 에이전트가 실제 업무를 수행하도록 만드는 시스템을 설계합니다.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  body { font-family: system-ui, sans-serif; display: grid; place-items: center; min-height: 100vh; margin: 0; color: #1e293b; }
+  :root {
+    --bg: #ffffff;
+    --bg-soft: #f8fafc;
+    --bg-tint: #f1f5f9;
+    --navy: #1b2f4e;
+    --navy-deep: #132238;
+    --accent: #2c5282;
+    --ink: #1e293b;
+    --muted: #64748b;
+    --faint: #94a3b8;
+    --line: #e2e8f0;
+    --line-soft: #eef2f7;
+    --sans: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --wrap: 780px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+
+  body {
+    margin: 0;
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--ink);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    word-break: keep-all;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- 상단 내비 ---------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(255,255,255,.88);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px; gap: 16px;
+  }
+  .topbar .me { font-weight: 700; color: var(--navy); font-size: 15px; }
+  .topbar nav { display: flex; gap: 20px; font-size: 13px; }
+  .topbar nav a { color: var(--muted); }
+  .topbar nav a:hover { color: var(--navy); text-decoration: none; }
+
+  /* ---------- 히어로 ---------- */
+  .hero { padding: 80px 0 56px; border-bottom: 1px solid var(--line); }
+  .eyebrow {
+    font-family: var(--mono); font-size: 12px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--faint); margin: 0 0 20px;
+  }
+  .hero h1 {
+    font-size: clamp(34px, 7vw, 46px); line-height: 1.2;
+    margin: 0; color: var(--navy-deep); letter-spacing: -.02em;
+  }
+  .hero .role {
+    margin: 10px 0 0; font-size: 17px; font-weight: 600; color: var(--accent);
+  }
+  .hero .tagline {
+    margin: 24px 0 0; font-size: 18px; line-height: 1.8; color: var(--ink);
+    max-width: 34em;
+  }
+  .links { display: flex; flex-wrap: wrap; gap: 8px; margin: 32px 0 0; padding: 0; list-style: none; }
+  .links a {
+    display: inline-block; padding: 7px 14px;
+    border: 1px solid var(--line); border-radius: 999px;
+    font-size: 13px; color: var(--muted); background: var(--bg);
+  }
+  .links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+  .focus { margin: 44px 0 0; display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .focus > div { background: var(--bg-soft); padding: 18px 20px; }
+  .focus dt {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
+    color: var(--faint); text-transform: uppercase; margin: 0 0 6px;
+  }
+  .focus dd { margin: 0; font-size: 14.5px; line-height: 1.65; color: var(--ink); }
+  @media (min-width: 680px) { .focus { grid-template-columns: repeat(3, 1fr); } }
+
+  /* ---------- 프로젝트 ---------- */
+  .project { padding: 72px 0; border-bottom: 1px solid var(--line); }
+  .project:last-of-type { border-bottom: 0; }
+
+  .p-head { margin-bottom: 40px; }
+  .p-num {
+    font-family: var(--mono); font-size: 13px; font-weight: 500;
+    color: var(--accent); letter-spacing: .08em;
+  }
+  .p-head h2 {
+    font-size: clamp(23px, 4.4vw, 29px); line-height: 1.38;
+    margin: 10px 0 0; color: var(--navy-deep); letter-spacing: -.015em;
+  }
+  .p-org {
+    margin: 12px 0 0; font-size: 14px; color: var(--muted);
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 18px 0 0; padding: 0; list-style: none; }
+  .tags li {
+    font-family: var(--mono); font-size: 11.5px;
+    padding: 4px 9px; border-radius: 4px;
+    background: var(--bg-tint); color: var(--muted);
+  }
+
+  .block { margin-top: 36px; }
+  .block > h3 {
+    display: flex; align-items: baseline; gap: 10px;
+    margin: 0 0 14px; padding-bottom: 10px;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 14px; color: var(--navy);
+  }
+  .block > h3 .en {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .12em;
+    color: var(--faint); font-weight: 500;
+  }
+  .block p { margin: 0 0 14px; }
+  .block p:last-child { margin-bottom: 0; }
+  .block ul { margin: 0; padding-left: 0; list-style: none; }
+  .block ul li {
+    position: relative; padding-left: 18px; margin-bottom: 12px;
+  }
+  .block ul li:last-child { margin-bottom: 0; }
+  .block ul li::before {
+    content: ''; position: absolute; left: 3px; top: .72em;
+    width: 4px; height: 4px; border-radius: 50%; background: var(--faint);
+  }
+  .block ul li strong { color: var(--navy-deep); font-weight: 600; }
+
+  .hl { background: linear-gradient(transparent 58%, #dbe7f3 58%); font-weight: 600; color: var(--navy-deep); }
+  code {
+    font-family: var(--mono); font-size: .88em;
+    background: var(--bg-tint); padding: 2px 5px; border-radius: 3px; color: var(--navy);
+  }
+
+  /* 성과 카드 */
+  .results { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+  .results li {
+    padding: 18px 20px; border: 1px solid var(--line); border-left: 3px solid var(--accent);
+    background: var(--bg-soft); margin: 0;
+  }
+  .results li::before { display: none; }
+  .results h4 { margin: 0 0 6px; font-size: 14.5px; color: var(--navy-deep); }
+  .results p { margin: 0; font-size: 14.5px; color: var(--muted); line-height: 1.68; }
+  @media (min-width: 680px) { .results { grid-template-columns: 1fr 1fr; } }
+
+  /* 지표 */
+  .metrics {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+    background: var(--line); border: 1px solid var(--line); margin: 24px 0 0;
+  }
+  .metrics div { background: var(--bg); padding: 16px 14px; text-align: center; }
+  .metrics .num {
+    font-family: var(--mono); font-size: 20px; font-weight: 500;
+    color: var(--navy-deep); display: block; line-height: 1.3;
+  }
+  .metrics .cap { font-size: 12px; color: var(--muted); display: block; margin-top: 4px; }
+  @media (min-width: 560px) { .metrics { grid-template-columns: repeat(4, 1fr); } }
+
+  /* 다이어그램 */
+  .diagram {
+    margin: 24px 0 0; border: 1px solid var(--line); background: var(--bg-soft);
+    padding: 22px 20px;
+  }
+  .diagram .cap {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--faint); margin: 0 0 16px;
+  }
+  .lane { border: 1px solid var(--line); background: var(--bg); padding: 14px 16px; }
+  .lane + .arrow { text-align: center; color: var(--faint); font-size: 12px; padding: 8px 0; }
+  .lane .who {
+    font-size: 12px; font-weight: 600; color: var(--navy); margin: 0 0 8px;
+  }
+  .lane .what {
+    font-family: var(--mono); font-size: 12px; line-height: 1.8;
+    color: var(--muted); margin: 0; word-break: break-all;
+  }
+  .lane.blocked { border-style: dashed; background: var(--bg-tint); }
+  .lane.blocked .who { color: var(--muted); }
+
+  /* 흐름 (가로) */
+  .flow { display: flex; flex-direction: column; align-items: stretch; gap: 6px; }
+  .flow .step {
+    text-align: center;
+    border: 1px solid var(--line); background: var(--bg);
+    padding: 12px 10px; font-size: 13px; line-height: 1.45; color: var(--ink);
+  }
+  .flow .step.on { border-color: var(--accent); background: #eef4fa; color: var(--navy-deep); font-weight: 600; }
+  .flow .sep { color: var(--faint); font-size: 13px; text-align: center; }
+  .flow .sep::before { content: '↓'; }
+  @media (min-width: 680px) {
+    .flow { flex-direction: row; align-items: center; gap: 8px; }
+    .flow .step { flex: 1 1 0; min-width: 0; }
+    .flow .sep::before { content: '→'; }
+  }
+
+  /* 비교 (전/후) */
+  .compare { display: grid; gap: 12px; margin: 24px 0 0; }
+  .compare > div { border: 1px solid var(--line); padding: 16px 18px; background: var(--bg); }
+  .compare .label {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--faint); margin: 0 0 8px;
+  }
+  .compare .body { margin: 0; font-size: 14px; line-height: 1.7; color: var(--muted); }
+  .compare .after { border-color: var(--accent); background: var(--bg-soft); }
+  .compare .after .body { color: var(--ink); }
+  @media (min-width: 680px) { .compare { grid-template-columns: 1fr 1fr; } }
+
+  /* ---------- 푸터 ---------- */
+  footer {
+    padding: 56px 0 72px; border-top: 1px solid var(--line);
+    background: var(--bg-soft);
+  }
+  footer p { margin: 0 0 6px; font-size: 14px; color: var(--muted); }
+  footer .sig { font-weight: 600; color: var(--navy-deep); }
+  footer a { color: var(--muted); }
+
+  @media (max-width: 560px) {
+    .topbar nav { gap: 14px; }
+    .hero { padding: 56px 0 40px; }
+    .project { padding: 56px 0; }
+  }
 </style>
 </head>
 <body>
-  <main>
-    <h1>김영준 · AI Engineer</h1>
-    <p>포트폴리오 준비 중입니다.</p>
-  </main>
+
+<div class="topbar">
+  <div class="wrap">
+    <span class="me">김영준</span>
+    <nav>
+      <a href="#p1">01</a>
+      <a href="#p2">02</a>
+      <a href="#p3">03</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">AI Engineer Portfolio</p>
+    <h1>김영준</h1>
+    <p class="role">AI Engineer</p>
+    <p class="tagline">
+      AI가 데모에서 멈추지 않고 <span class="hl">실제 업무를 끝까지 수행하도록</span> 만드는 일을 합니다.
+      모델을 붙이는 것보다, 모델이 틀릴 수 있다는 전제 위에서 시스템을 어떻게 설계할지를 먼저 생각합니다.
+    </p>
+
+    <ul class="links">
+      <li><a href="https://github.com/Cafelatte1">GitHub</a></li>
+      <li><a href="mailto:flash659@gmail.com">flash659@gmail.com</a></li>
+    </ul>
+
+    <dl class="focus">
+      <div>
+        <dt>RAG</dt>
+        <dd>B2B 고객사 대상 대화형 AI 서비스 구축과 커스터마이징</dd>
+      </div>
+      <div>
+        <dt>Agent / MCP</dt>
+        <dd>에이전트가 안전하게 일할 수 있는 도구와 프로토콜 설계</dd>
+      </div>
+      <div>
+        <dt>Data Pipeline</dt>
+        <dd>수집·정제·공급을 자동화해 서비스에 투입되는 파이프라인</dd>
+      </div>
+    </dl>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ 01 ============ -->
+<article class="project" id="p1">
+  <div class="wrap">
+    <div class="p-head">
+      <span class="p-num">01</span>
+      <h2>AI 학습용 부동산 데이터 파이프라인 구축 및 매출 전환</h2>
+      <p class="p-org">㈜코그콤 · 고객사 ㈜젠스타메이트</p>
+      <ul class="tags">
+        <li>Python</li><li>Web Crawling</li><li>Browser Automation</li><li>REST API</li><li>Data Pipeline</li>
+      </ul>
+    </div>
+
+    <section class="block">
+      <h3>상황 <span class="en">Situation</span></h3>
+      <ul>
+        <li>젠스타메이트 의뢰로 <strong>성북구청 건축 인허가 데이터</strong>를 AI 학습용으로 수집·공급하는 파이프라인을 맡았습니다.</li>
+        <li>대상 사이트는 <span class="hl">정적 페이지와 동적 페이지가 뒤섞인 구조</span>였고, 수집한 데이터를 정제·표준화해 서비스에 공급하는 체계는 아예 없었습니다.</li>
+      </ul>
+    </section>
+
+    <section class="block">
+      <h3>과제 <span class="en">Task</span></h3>
+      <ul>
+        <li>하나의 수집 방식으로는 전체 데이터를 가져올 수 없었습니다. 정적·동적 혼재 구조를 모두 커버하는 수집 방법이 필요했습니다.</li>
+        <li>수작업 수집으로는 정기 갱신이 불가능했습니다. AI 모델이 바로 쓸 수 있는 형태로 정제해 <strong>주기적으로 공급</strong>하는 파이프라인까지 만들어야 했습니다.</li>
+      </ul>
+    </section>
+
+    <section class="block">
+      <h3>해결 <span class="en">Action</span></h3>
+      <ul>
+        <li><strong>페이지 유형을 먼저 분류했습니다.</strong> DOM 구조·네트워크 요청·렌더링 방식을 직접 분석해 어떤 페이지가 서버에서 완성되어 오고 어떤 페이지가 브라우저에서 그려지는지 구분했습니다.</li>
+        <li><strong>전면 브라우저 자동화를 쓰지 않았습니다.</strong> 모든 페이지를 브라우저로 여는 편이 구현은 쉽지만 속도와 리소스 비용이 큽니다. 정적 페이지는 HTTP 파싱으로, 동적 페이지만 브라우저 자동화로 처리하는 <span class="hl">하이브리드 크롤링 모듈</span>을 설계했습니다.</li>
+        <li>수집 결과를 AI 학습에 적합한 <strong>표준 포맷으로 정제</strong>하고, 이를 API로 제공하는 서버까지 붙여 서비스가 바로 끌어다 쓸 수 있게 했습니다.</li>
+      </ul>
+
+      <div class="diagram">
+        <p class="cap">Pipeline</p>
+        <div class="flow">
+          <div class="step">건축 인허가<br>공개 데이터</div>
+          <span class="sep"></span>
+          <div class="step on">구조 분석<br>정적 + 동적 분리</div>
+          <span class="sep"></span>
+          <div class="step on">정제 · 표준화</div>
+          <span class="sep"></span>
+          <div class="step">DB 적재<br>API 서버</div>
+          <span class="sep"></span>
+          <div class="step">고객사 서비스</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h3>성과 <span class="en">Result</span></h3>
+      <ul class="results">
+        <li>
+          <h4>매출 전환</h4>
+          <p>구축한 파이프라인이 젠스타메이트 서비스의 핵심 인프라로 투입되어 실제 매출로 이어졌습니다.</p>
+        </li>
+        <li>
+          <h4>월별 자동 수집</h4>
+          <p>배포 후 크롤링 모듈이 월 단위로 자동 실행되어, 별도 개입 없이 최신 데이터가 계속 쌓입니다.</p>
+        </li>
+        <li>
+          <h4>내부 솔루션 연동</h4>
+          <p>업무 자동화 솔루션 리컬럼과 연결되는 API 서버를 구축해 수집 데이터를 서비스에 직접 공급했습니다.</p>
+        </li>
+        <li>
+          <h4>비용 설계</h4>
+          <p>수집 방식을 페이지 유형별로 나눠, 전면 브라우저 자동화 대비 실행 시간과 리소스를 낮췄습니다.</p>
+        </li>
+      </ul>
+    </section>
+  </div>
+</article>
+
+<!-- ============ 02 ============ -->
+<article class="project" id="p2">
+  <div class="wrap">
+    <div class="p-head">
+      <span class="p-num">02</span>
+      <h2>AI 에이전트가 개인정보를 보지 못한 채 결제까지 끝내는 구매 자동화</h2>
+      <p class="p-org">
+        개인 프로젝트 ·
+        <a href="https://github.com/Cafelatte1/FronyBrowser">FronyBrowser</a> ·
+        <a href="https://github.com/Cafelatte1/project-shop">FronyShopping</a>
+      </p>
+      <ul class="tags">
+        <li>TypeScript</li><li>MCP</li><li>Playwright/CDP</li><li>HMAC</li><li>SQLite</li><li>DPAPI</li>
+      </ul>
+    </div>
+
+    <section class="block">
+      <h3>상황 <span class="en">Situation</span></h3>
+      <ul>
+        <li>"늘 사던 그 물 주문해줘"를 에이전트에게 맡기려면 로그인 비밀번호, 카드번호, 결제 PIN이 필요합니다. 그런데 그 값을 에이전트에게 주는 순간 <span class="hl">LLM 컨텍스트·응답·로그에 전부 남습니다.</span></li>
+        <li>더 근본적인 문제는 에이전트가 <strong>웹페이지에 의해 인젝션당할 수 있다</strong>는 점이었습니다. 화면에 적힌 가격과 수량을 그대로 믿고 결제하면, 조작된 페이지 하나로 잘못된 주문이 나갑니다.</li>
+      </ul>
+    </section>
+
+    <section class="block">
+      <h3>과제 <span class="en">Task</span></h3>
+      <ul>
+        <li>에이전트가 개인정보 값을 <strong>단 한 번도 보지 않으면서</strong> 로그인부터 결제 완료까지 완주하게 만들 것.</li>
+        <li>에이전트가 오염되더라도 피해가 한도 안에 묶이도록, <strong>판단의 권한을 에이전트 밖에</strong> 둘 것.</li>
+      </ul>
+    </section>
+
+    <section class="block">
+      <h3>해결 <span class="en">Action</span></h3>
+      <ul>
+        <li>
+          <strong>값이 나가는 길을 하나로 좁혔습니다.</strong>
+          에이전트는 <code>fill(ref, "{{vault:card.number}}")</code>처럼 키 이름만 보냅니다.
+          실제 값으로 바뀌는 지점은 코드 전체에서 한 곳뿐이고, 치환된 값은 호출자에게 돌아가지 않고 브라우저로만 전달됩니다.
+          응답은 <code>{ filledFrom, len }</code> — 키 이름과 길이만 남습니다.
+        </li>
+        <li>
+          <strong>나가는 모든 응답을 한 출구에서 검사합니다.</strong>
+          HTTP와 MCP 두 입구 중 한쪽에만 두면 다른 쪽이 우회하므로, 스크러버를 통과한 객체만 만들 수 있는 타입을 정의해
+          <span class="hl">검사를 빠뜨린 코드는 아예 컴파일되지 않게</span> 했습니다. 카드번호는 하이픈·마스킹·뒤 4자리 같은 표기 변형까지 함께 지웁니다.
+        </li>
+        <li>
+          <strong>읽지 않음으로써 막았습니다.</strong>
+          페이지 구조를 넘길 때 input의 <code>value</code>는 어떤 경로로도 읽지 않습니다.
+          지우는 게 아니라 처음부터 가져오지 않는 방식입니다. 스크린샷은 스크러버가 청소할 수 없으므로,
+          결제 iframe 안쪽까지 내려가 입력 필드를 이미지 단계에서 마스킹합니다.
+        </li>
+        <li>
+          <strong>임의 JS 실행을 넣지 않았습니다.</strong>
+          스크러버는 평문 일치로 동작하므로 <code>btoa(value)</code> 한 줄이면 방어 전체가 무력화됩니다.
+          그래서 편의 기능 대신 <span class="hl">핸들러 폴더 자체를 기능 화이트리스트</span>로 삼았습니다.
+        </li>
+        <li>
+          <strong>판단과 실행을 두 서버로 분리했습니다.</strong>
+          가격·수량·한도 판정은 FronyShopping이 하고, 그 결과를 <span class="hl">HMAC 서명된 결제 승인 토큰</span>으로 넘깁니다.
+          토큰은 에이전트 손을 거쳐 전달되지만 서명·5분 만료·세션 바인딩·1회용 네 겹으로 막혀 있어, 인젝션당한 에이전트도 위조하거나 재사용할 수 없습니다.
+        </li>
+        <li>
+          <strong>되돌릴 수 없는 지점을 기준으로 상태를 설계했습니다.</strong>
+          결제 직전에 승인을 기록하고 판정은 그 앞뒤에 남깁니다.
+          결제 중 상태는 <span class="hl">만료시키지 않습니다</span> — 돈이 이미 나갔을 수 있으므로, 사람이나 에이전트가 결과를 확인해 닫을 때까지 남겨 둡니다.
+        </li>
+      </ul>
+
+      <div class="diagram">
+        <p class="cap">개인정보 경계</p>
+
+        <div class="lane blocked">
+          <p class="who">에이전트(LLM)가 보는 것</p>
+          <p class="what">fill(ref, "{{vault:card.number}}")<br>→ { ok: true, filledFrom: "card.number", len: 16 }</p>
+        </div>
+        <div class="arrow">↓ 키 이름만 전달</div>
+
+        <div class="lane">
+          <p class="who">FronyBrowser 프로세스 — 이 안에서만 값이 존재</p>
+          <p class="what">암호화 vault → resolve() → CDP 키스트로크</p>
+        </div>
+        <div class="arrow">↓ 실제 값</div>
+
+        <div class="lane">
+          <p class="who">웹 페이지</p>
+          <p class="what">입력 완료 · 응답은 스크러버를 거쳐 되돌아감</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h3>성과 <span class="en">Result</span></h3>
+
+      <div class="metrics">
+        <div><span class="num">20,595</span><span class="cap">TypeScript 라인</span></div>
+        <div><span class="num">29</span><span class="cap">MCP 도구</span></div>
+        <div><span class="num">536</span><span class="cap">테스트 케이스</span></div>
+        <div><span class="num">172</span><span class="cap">스크러버 실제 적중</span></div>
+      </div>
+
+      <ul class="results" style="margin-top:24px">
+        <li>
+          <h4>실결제 완주</h4>
+          <p>컬리와 교보문고에서 로그인부터 결제·주문내역 확인까지 실제 결제로 완주했습니다. 보안 키패드를 통한 PIN 입력 경로까지 실측했습니다.</p>
+        </li>
+        <li>
+          <h4>설계가 작동한 증거</h4>
+          <p>감사 로그 1,183건 중 스크러버가 172건을 실제로 잡아냈습니다. 대부분 사이트가 배송지 이름·전화를 본문에 그려 넣은 경우였습니다.</p>
+        </li>
+        <li>
+          <h4>규칙을 테스트로 고정</h4>
+          <p>배치를 정하지 않은 핸들러가 조용히 에이전트에 노출되지 않도록, 도구 노출 목록 자체를 테스트와 기동 시점 검사로 묶었습니다.</p>
+        </li>
+        <li>
+          <h4>오픈소스 공개</h4>
+          <p>FronyBrowser를 MIT 라이선스로 공개하고 npm·MCP Registry에 등록했습니다.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="block">
+      <h3>돌아보며 <span class="en">Reflection</span></h3>
+      <p>
+        가장 오래 고민한 건 기능이 아니라 <strong>무엇을 넣지 않을 것인가</strong>였습니다.
+        임의 JS 실행, HTML 덤프, 콘솔 조회는 전부 편리하지만 하나같이 방어를 우회하는 길이 됩니다.
+        기능을 더하는 판단보다 거절하는 판단이 시스템의 성격을 정한다는 걸 배웠습니다.
+      </p>
+      <p>
+        결제 승인 토큰을 <span class="hl">검증 시점이 아니라 성공 시점에 소진</span>하도록 바꾼 것도 같은 맥락이었습니다.
+        검증 때 태우면 실패한 입력 하나가 토큰을 날려버립니다. 실제로 겪고 나서야 고친 부분입니다.
+      </p>
+    </section>
+  </div>
+</article>
+
+<!-- ============ 03 ============ -->
+<article class="project" id="p3">
+  <div class="wrap">
+    <div class="p-head">
+      <span class="p-num">03</span>
+      <h2>이미지로만 존재하던 공고를 검색 가능한 데이터로 — 이벤트 분석 MCP 서버</h2>
+      <p class="p-org">
+        현업 협업 프로젝트 · 한국투자증권 공개 이벤트 페이지 대상 ·
+        <a href="https://github.com/Cafelatte1/project-kisevent">project-kisevent</a>
+      </p>
+      <ul class="tags">
+        <li>Python</li><li>MCP</li><li>VLM</li><li>FastAPI</li><li>SQLite</li><li>Pillow</li>
+      </ul>
+    </div>
+
+    <section class="block">
+      <h3>상황 <span class="en">Situation</span></h3>
+      <ul>
+        <li>현업에서 "지금 영업점 고객 대상 이벤트가 뭐가 있지?"에 답하려면 공고를 하나씩 열어 눈으로 읽어야 했습니다.</li>
+        <li>원인은 단순했습니다. <span class="hl">공고 내용이 전부 배너 이미지 안에 있고 HTML에는 텍스트가 없습니다.</span> 배너는 세로 7,175~29,482px, 34건 합계 약 67MB였습니다.</li>
+        <li>목록의 탭 구분(영업점 / 뱅키스)으로 대상을 가리는 방법도 틀렸습니다. 연금 이벤트가 양쪽 탭에 동시에 실려 오분류됐습니다.</li>
+      </ul>
+    </section>
+
+    <section class="block">
+      <h3>과제 <span class="en">Task</span></h3>
+      <ul>
+        <li>이미지 안의 기간·대상·상품·실적 조건을 구조화해, <strong>에이전트가 자연어 질문에 바로 답할 수 있게</strong> 만들 것.</li>
+        <li>사내 개인 PC에서 도는 환경이므로 <strong>외부 API 키 없이</strong> 동작할 것.</li>
+      </ul>
+    </section>
+
+    <section class="block">
+      <h3>해결 <span class="en">Action</span></h3>
+      <ul>
+        <li>
+          <strong>처음 설계는 전문 전사였고, 그걸 버렸습니다.</strong>
+          배너를 여백 기준으로 11~20장 타일로 쪼개 전부 읽는 방식이었는데, 초기 34건에 <span class="hl">40~50만 토큰</span>이 들 것으로 추산됐습니다.
+        </li>
+        <li>
+          <strong>버리기 전에 근거를 만들었습니다.</strong>
+          진행 중 공고 20건의 상단 4,000px를 전수 판독해, 필요한 정보 네 가지가 모두
+          <span class="hl">y 1,400~3,450px 구간에 모여 있음</span>을 확인했습니다.
+          그래서 고정 크롭 한 장 = 호출 한 번으로 줄이고, 전사 경로의 코드·테이블을 전부 삭제했습니다.
+        </li>
+        <li>
+          <strong>별도 VLM API를 붙이지 않았습니다.</strong>
+          MCP는 이미지를 그대로 모델에 전달할 수 있습니다. 크롭 이미지를 MCP 응답에 실어
+          <span class="hl">사용자가 이미 쓰고 있는 에이전트의 비전 능력을 그대로 재사용</span>했습니다. 별도 키도, 추가 비용도 없습니다.
+        </li>
+        <li>
+          <strong>대상 판정 기준을 탭에서 이미지로 옮겼습니다.</strong>
+          배너 본문이 말하는 대상을 정본으로 삼아, 탭 구분이 만들어내던 편향을 없앴습니다.
+        </li>
+        <li>
+          <strong>워크플로우를 문서가 아니라 프로토콜에 넣었습니다.</strong>
+          "수집 1회 → 조회 → 미요약이면 먼저 요약 → 서브에이전트 병렬" 순서를 도구 설명문과 응답의 다음 지시에 박아 넣어,
+          에이전트가 읽는 것만으로 올바른 순서를 따르게 했습니다. 저장 시 스키마 검증에 실패하면 어느 필드가 왜 틀렸는지 돌려주고 에이전트가 고쳐 다시 보냅니다.
+        </li>
+      </ul>
+
+      <div class="compare">
+        <div>
+          <p class="label">v1 — 전문 전사</p>
+          <p class="body">배너 1장을 11~20 타일로 분할해 전부 읽기<br>초기 34건 기준 40~50만 토큰 추정</p>
+        </div>
+        <div class="after">
+          <p class="label">v2 — 고정 크롭</p>
+          <p class="body">상단 정보 블록 1장만 크롭해 호출 1회<br>검출률 손실 없이 53건 전수 통과</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h3>성과 <span class="en">Result</span></h3>
+
+      <div class="metrics">
+        <div><span class="num">53/53</span><span class="cap">정보 블록 검출</span></div>
+        <div><span class="num">33/33</span><span class="cap">진행 중 대상 판정</span></div>
+        <div><span class="num">11</span><span class="cap">탭 기준 오분류 교정</span></div>
+        <div><span class="num">46</span><span class="cap">테스트</span></div>
+      </div>
+
+      <ul class="results" style="margin-top:24px">
+        <li>
+          <h4>전수 검증</h4>
+          <p>진행 중 33건과 무작위 추출한 종료 20건, 총 53건 전부에서 크롭 범위를 벗어나 정보를 놓친 사례가 없었습니다.</p>
+        </li>
+        <li>
+          <h4>오분류 교정</h4>
+          <p>목록 탭 기준으로는 잘못 잡히던 11건을 이미지 판정이 바로잡았습니다. 전부 양쪽 탭에 걸쳐 있던 연금 이벤트였습니다.</p>
+        </li>
+        <li>
+          <h4>비개발자 설치</h4>
+          <p>설치 문서를 사람이 아닌 에이전트가 읽는 지시문으로 작성해, "셋팅해줘" 한마디로 설치가 끝나게 만들었습니다.</p>
+        </li>
+        <li>
+          <h4>이틀 만에 동작</h4>
+          <p>프로토타입부터 설치 스크립트까지 약 18시간, 커밋 32개로 완성했습니다.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="block">
+      <h3>돌아보며 <span class="en">Reflection</span></h3>
+      <p>
+        가장 큰 결정은 <strong>공들여 만든 v1을 지운 것</strong>이었습니다.
+        타일 분할은 문장이 잘리지 않게 여백을 찾아 자르는 알고리즘까지 만들어 둔 상태였습니다.
+        그래도 "정보가 어디 있는지" 20건을 직접 세어 보니 훨씬 단순한 답이 있었습니다.
+        측정하기 전에 설계를 확정하면 정교한 방향으로 잘못 갈 수 있다는 걸 배웠습니다.
+      </p>
+    </section>
+  </div>
+</article>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="sig">김영준 · AI Engineer</p>
+    <p><a href="mailto:flash659@gmail.com">flash659@gmail.com</a> · <a href="https://github.com/Cafelatte1">github.com/Cafelatte1</a></p>
+  </div>
+</footer>
+
 </body>
 </html>
