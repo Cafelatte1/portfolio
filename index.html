@@ -79,12 +79,9 @@
   .p-org {
     margin: 12px 0 0; font-size: 14px; color: var(--muted);
   }
-  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 18px 0 0; padding: 0; list-style: none; }
-  .tags li {
-    font-family: var(--mono); font-size: 11.5px;
-    padding: 4px 9px; border-radius: 4px;
-    background: var(--bg-tint); color: var(--muted);
-  }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 18px 0 0; padding: 0; list-style: none; }
+  .tags li { font-family: var(--mono); font-size: 12.5px; color: var(--accent); }
+  .tags li::before { content: '#'; color: var(--faint); }
 
   .block { margin-top: 36px; }
   .block > h3 {
