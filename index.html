@@ -133,7 +133,6 @@
   .p-figure figcaption { margin-top: 10px; font-size: 12.5px; line-height: 1.6; color: var(--muted); }
   .dgm-box { fill: #fff; stroke: var(--line); }
   .dgm-box-on { fill: #eef4fa; stroke: var(--accent); }
-  .dgm-box-off { fill: var(--bg-tint); stroke: var(--line); stroke-dasharray: 3 3; }
   .dgm-t { font-family: var(--sans); font-size: 13px; fill: var(--ink); }
   .dgm-b { font-family: var(--sans); font-size: 13px; font-weight: 600; fill: var(--navy-deep); }
   .dgm-s { font-family: var(--sans); font-size: 11.5px; fill: var(--muted); }
@@ -151,19 +150,6 @@
   .results p { margin: 0; font-size: 14.5px; color: var(--muted); line-height: 1.68; }
   @media (min-width: 680px) { .results { grid-template-columns: 1fr 1fr; } }
 
-  /* 지표 */
-  .metrics {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
-    background: var(--line); border: 1px solid var(--line); margin: 24px 0 0;
-  }
-  .metrics div { background: var(--bg); padding: 16px 14px; text-align: center; }
-  .metrics .num {
-    font-family: var(--mono); font-size: 20px; font-weight: 500;
-    color: var(--navy-deep); display: block; line-height: 1.3;
-  }
-  .metrics .cap { font-size: 12px; color: var(--muted); display: block; margin-top: 4px; }
-  @media (min-width: 560px) { .metrics { grid-template-columns: repeat(4, 1fr); } }
-
   /* 다이어그램 */
   .diagram {
     margin: 24px 0 0; border: 1px solid var(--line); background: var(--bg-soft);
@@ -173,17 +159,6 @@
     font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
     text-transform: uppercase; color: var(--faint); margin: 0 0 16px;
   }
-  .lane { border: 1px solid var(--line); background: var(--bg); padding: 14px 16px; }
-  .lane + .arrow { text-align: center; color: var(--faint); font-size: 12px; padding: 8px 0; }
-  .lane .who {
-    font-size: 12px; font-weight: 600; color: var(--navy); margin: 0 0 8px;
-  }
-  .lane .what {
-    font-family: var(--mono); font-size: 12px; line-height: 1.8;
-    color: var(--muted); margin: 0; word-break: break-all;
-  }
-  .lane.blocked { border-style: dashed; background: var(--bg-tint); }
-  .lane.blocked .who { color: var(--muted); }
 
   /* 흐름 (가로) */
   .flow { display: flex; flex-direction: column; align-items: stretch; gap: 6px; }
@@ -200,18 +175,6 @@
     .flow .step { flex: 1 1 0; min-width: 0; }
     .flow .sep::before { content: '→'; }
   }
-
-  /* 비교 (전/후) */
-  .compare { display: grid; gap: 12px; margin: 24px 0 0; }
-  .compare > div { border: 1px solid var(--line); padding: 16px 18px; background: var(--bg); }
-  .compare .label {
-    font-family: var(--mono); font-size: 11px; letter-spacing: .1em;
-    text-transform: uppercase; color: var(--faint); margin: 0 0 8px;
-  }
-  .compare .body { margin: 0; font-size: 14px; line-height: 1.7; color: var(--muted); }
-  .compare .after { border-color: var(--accent); background: var(--bg-soft); }
-  .compare .after .body { color: var(--ink); }
-  @media (min-width: 680px) { .compare { grid-template-columns: 1fr 1fr; } }
 
   /* ---------- 푸터 ---------- */
   footer {
@@ -518,14 +481,7 @@
     <section class="block">
       <h3>Result</h3>
 
-      <div class="metrics">
-        <div><span class="num">20,595</span><span class="cap">TypeScript 라인</span></div>
-        <div><span class="num">29</span><span class="cap">MCP 도구</span></div>
-        <div><span class="num">536</span><span class="cap">테스트 케이스</span></div>
-        <div><span class="num">172</span><span class="cap">스크러버 실제 적중</span></div>
-      </div>
-
-      <ul class="results" style="margin-top:24px">
+      <ul class="results">
         <li>
           <h4>실결제 완주</h4>
           <p>컬리와 교보문고에서 로그인부터 결제·주문내역 확인까지 실제 결제로 완주했습니다. 보안 키패드를 통한 PIN 입력 경로까지 실측했습니다.</p>
@@ -660,29 +616,12 @@
         </li>
       </ul>
 
-      <div class="compare">
-        <div>
-          <p class="label">v1 — 전문 전사</p>
-          <p class="body">배너 1장을 11~20 타일로 분할해 전부 읽기<br>초기 34건 기준 40~50만 토큰 추정</p>
-        </div>
-        <div class="after">
-          <p class="label">v2 — 고정 크롭</p>
-          <p class="body">상단 정보 블록 1장만 크롭해 호출 1회<br>검출률 손실 없이 53건 전수 통과</p>
-        </div>
-      </div>
     </section>
 
     <section class="block">
       <h3>Result</h3>
 
-      <div class="metrics">
-        <div><span class="num">53/53</span><span class="cap">정보 블록 검출</span></div>
-        <div><span class="num">33/33</span><span class="cap">진행 중 대상 판정</span></div>
-        <div><span class="num">11</span><span class="cap">탭 기준 오분류 교정</span></div>
-        <div><span class="num">46</span><span class="cap">테스트</span></div>
-      </div>
-
-      <ul class="results" style="margin-top:24px">
+      <ul class="results">
         <li>
           <h4>전수 검증</h4>
           <p>진행 중 33건과 무작위 추출한 종료 20건, 총 53건 전부에서 크롭 범위를 벗어나 정보를 놓친 사례가 없었습니다.</p>
