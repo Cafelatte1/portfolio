@@ -129,10 +129,6 @@
     display: block; width: 100%; height: auto;
     border: 1px solid var(--line); background: var(--bg-soft);
   }
-  .split { display: grid; gap: 18px; align-items: center; }
-  .split > img { display: block; width: 100%; height: auto; border: 1px solid var(--line); }
-  .split > svg { display: block; width: 100%; height: auto; }
-  @media (min-width: 680px) { .split { grid-template-columns: 196px 1fr; } }
   .p-figure figcaption { margin-top: 10px; font-size: 12.5px; line-height: 1.6; color: var(--muted); }
   .dgm-box { fill: #fff; stroke: var(--line); }
   .dgm-box-on { fill: #eef4fa; stroke: var(--accent); }
@@ -141,6 +137,48 @@
   .dgm-s { font-family: var(--sans); font-size: 11.5px; fill: var(--muted); }
   .dgm-k { font-family: var(--mono); font-size: 10.5px; fill: var(--faint); letter-spacing: .1em; }
   .dgm-l { stroke: var(--faint); fill: none; }
+
+  /* 캐러셀 */
+  .carousel-track {
+    display: grid; grid-auto-flow: column; grid-auto-columns: 100%;
+    overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+    border: 1px solid var(--line); background: var(--bg-soft);
+    scrollbar-width: none;
+  }
+  .carousel-track::-webkit-scrollbar { display: none; }
+  .carousel-track > img {
+    scroll-snap-align: start; display: block;
+    width: 100%; aspect-ratio: 16 / 9; object-fit: contain;
+  }
+  .carousel-nav { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px; }
+  .carousel-nav button {
+    width: 8px; height: 8px; padding: 0; border: 1px solid var(--faint); border-radius: 50%;
+    background: transparent; cursor: pointer;
+  }
+  .carousel-nav button[aria-current="true"] { background: var(--accent); border-color: var(--accent); }
+  .carousel-label { font-size: 12.5px; color: var(--muted); margin-left: 6px; }
+
+  /* 단계 스텝퍼 */
+  .steps { display: flex; overflow-x: auto; scrollbar-width: none; }
+  .steps::-webkit-scrollbar { display: none; }
+  .steps button {
+    flex: 1 0 auto; min-width: 118px; text-align: center; cursor: pointer;
+    padding: 12px 10px; border: 1px solid var(--line); background: #fff;
+    font-family: var(--sans); color: var(--ink);
+  }
+  .steps button[aria-selected="true"] { background: #eef4fa; border-color: var(--accent); }
+  .steps .s-key {
+    display: block; font-family: var(--mono); font-size: 10.5px;
+    letter-spacing: .1em; color: var(--faint); margin-bottom: 3px;
+  }
+  .steps button[aria-selected="true"] .s-key { color: var(--accent); }
+  .steps .s-name { display: block; font-size: 13px; font-weight: 600; color: var(--navy-deep); }
+  .steps .s-arrow { flex: 0 0 auto; align-self: center; padding: 0 6px; color: var(--faint); font-size: 10px; }
+  .step-panel { border: 1px solid var(--accent); border-top: 0; padding: 16px 18px; background: var(--bg-soft); }
+  .step-panel[hidden] { display: none; }
+  .step-panel dt { font-size: 12.5px; font-weight: 600; color: var(--accent); }
+  .step-panel dd { margin: 4px 0 12px; font-size: 14.5px; line-height: 1.7; color: var(--ink); }
+  .step-panel dd:last-child { margin-bottom: 0; }
 
   /* 성과 카드 */
   .results { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; align-items: stretch; }
@@ -165,6 +203,9 @@
   @media (max-width: 560px) {
     .topbar nav { gap: 14px; }
     .project { padding: 56px 0; }
+    .steps { flex-direction: column; }
+    .steps button { min-width: 0; }
+    .steps .s-arrow { padding: 3px 0; transform: rotate(90deg); }
   }
 </style>
 </head>
@@ -261,44 +302,75 @@
     </figure>
 
     <figure class="p-figure">
-      <div class="split">
-        <svg viewBox="0 0 196 356" role="img" aria-label="트랜잭션 설계: 거래 상태 전이 5단계">
-          <defs>
-            <marker id="a2" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
-              <path d="M0 0 L8 4 L0 8 z" fill="#94a3b8"/>
-            </marker>
-          </defs>
-
-          <text class="dgm-b" x="98" y="14" text-anchor="middle">트랜잭션 설계</text>
-
-          <rect class="dgm-box" x="8" y="38" width="180" height="48" rx="2"/>
-          <text class="dgm-k" x="98" y="59" text-anchor="middle">OPENED</text>
-          <text class="dgm-t" x="98" y="77" text-anchor="middle">거래 시작</text>
-          <line class="dgm-l" x1="98" y1="86" x2="98" y2="102" marker-end="url(#a2)"/>
-
-          <rect class="dgm-box" x="8" y="104" width="180" height="48" rx="2"/>
-          <text class="dgm-k" x="98" y="125" text-anchor="middle">IDENTIFIED</text>
-          <text class="dgm-t" x="98" y="143" text-anchor="middle">품목 확인</text>
-          <line class="dgm-l" x1="98" y1="152" x2="98" y2="168" marker-end="url(#a2)"/>
-
-          <rect class="dgm-box" x="8" y="170" width="180" height="48" rx="2"/>
-          <text class="dgm-k" x="98" y="191" text-anchor="middle">CHECKED</text>
-          <text class="dgm-t" x="98" y="209" text-anchor="middle">거래 승인 서명</text>
-          <line class="dgm-l" x1="98" y1="218" x2="98" y2="234" marker-end="url(#a2)"/>
-
-          <rect class="dgm-box-on" x="8" y="236" width="180" height="48" rx="2"/>
-          <text class="dgm-k" x="98" y="257" text-anchor="middle">PAYING</text>
-          <text class="dgm-b" x="98" y="275" text-anchor="middle">결제</text>
-          <line class="dgm-l" x1="98" y1="284" x2="98" y2="300" marker-end="url(#a2)"/>
-
-          <rect class="dgm-box" x="8" y="302" width="180" height="48" rx="2"/>
-          <text class="dgm-k" x="98" y="323" text-anchor="middle">PURCHASED</text>
-          <text class="dgm-t" x="98" y="341" text-anchor="middle">구매 기록</text>
-        </svg>
-
-        <img src="images/02-shopping.png" alt="FronyShopping 콘솔의 거래 상세 화면. 상태 전이 타임라인과 거래 한도, 품목별 허용 가격과 실제 가격, 호출 로그" loading="lazy">
+      <div class="carousel">
+        <div class="carousel-track">
+          <img src="images/shop-01.png" alt="FronyShopping 대시보드. 오늘 쓸 수 있는 금액과 일일 한도, 진행 중인 거래 수, 30일 지출" loading="lazy">
+          <img src="images/shop-02.png" alt="FronyShopping 거래 목록. 거래별 상태와 품목, 단계 진행도" loading="lazy">
+          <img src="images/shop-03.png" alt="FronyShopping 거래 상세. 상태 전이 타임라인과 거래 한도, 품목별 허용 가격과 실제 가격, 호출 로그" loading="lazy">
+        </div>
+        <div class="carousel-nav">
+          <button type="button" aria-label="대시보드" aria-current="true"></button>
+          <button type="button" aria-label="거래 목록"></button>
+          <button type="button" aria-label="거래 상세"></button>
+          <span class="carousel-label">대시보드</span>
+        </div>
       </div>
-      <figcaption>왼쪽이 트랜잭션이 밟는 다섯 단계, 오른쪽은 실제로 완주한 거래 기록입니다. 결제 승인 토큰은 <strong>PAYING 직전</strong>에 한 번만 발급되고, 이 상태는 만료되지 않습니다 — 돈이 이미 나갔을 수 있기 때문입니다.</figcaption>
+      <figcaption>한도는 서버가 쥐고 있어 에이전트가 바꿀 수 없습니다. 거래마다 무엇을 얼마에 샀고 어느 단계에서 멈췄는지가 그대로 남습니다.</figcaption>
+    </figure>
+
+    <figure class="p-figure">
+      <div class="steps" role="tablist" aria-label="트랜잭션 설계: 거래가 밟는 다섯 단계">
+        <button type="button" role="tab" id="tab-0" aria-controls="sp-0" aria-selected="true">
+          <span class="s-key">OPENED</span><span class="s-name">거래 시작</span>
+        </button>
+        <span class="s-arrow" aria-hidden="true">&#9654;</span>
+        <button type="button" role="tab" id="tab-1" aria-controls="sp-1" aria-selected="false">
+          <span class="s-key">IDENTIFIED</span><span class="s-name">품목 확인</span>
+        </button>
+        <span class="s-arrow" aria-hidden="true">&#9654;</span>
+        <button type="button" role="tab" id="tab-2" aria-controls="sp-2" aria-selected="false">
+          <span class="s-key">CHECKED</span><span class="s-name">거래 승인 서명</span>
+        </button>
+        <span class="s-arrow" aria-hidden="true">&#9654;</span>
+        <button type="button" role="tab" id="tab-3" aria-controls="sp-3" aria-selected="false">
+          <span class="s-key">PAYING</span><span class="s-name">결제</span>
+        </button>
+        <span class="s-arrow" aria-hidden="true">&#9654;</span>
+        <button type="button" role="tab" id="tab-4" aria-controls="sp-4" aria-selected="false">
+          <span class="s-key">PURCHASED</span><span class="s-name">구매 기록</span>
+        </button>
+      </div>
+      <dl class="step-panel" id="sp-0" role="tabpanel" aria-labelledby="tab-0">
+        <dt>역할</dt>
+        <dd>무엇을 얼마까지 살지 정하고 거래를 엽니다. 한도를 넘길 거래는 애초에 열리지 않습니다.</dd>
+        <dt>기술적 고려</dt>
+        <dd>거래는 약 3시간 뒤 만료됩니다. 로그인이나 캡차로 시간이 길어져 만료돼도 돈은 움직이지 않았으므로, 새 거래를 열고 처음부터 다시 밟습니다.</dd>
+      </dl>
+      <dl class="step-panel" id="sp-1" role="tabpanel" aria-labelledby="tab-1" hidden>
+        <dt>역할</dt>
+        <dd>장바구니에 담긴 물건이 등록된 품목과 같은 것인지 확인합니다.</dd>
+        <dt>기술적 고려</dt>
+        <dd>이름·용량·옵션·수량을 각각 대조합니다. 에이전트가 맞다고 주장하는 것이 아니라 서버가 판정한 결과만 다음 단계로 넘어갑니다.</dd>
+      </dl>
+      <dl class="step-panel" id="sp-2" role="tabpanel" aria-labelledby="tab-2" hidden>
+        <dt>역할</dt>
+        <dd>가격·수량·한도를 서버가 판정하고, 결제를 허가하는 토큰을 발급합니다.</dd>
+        <dt>기술적 고려</dt>
+        <dd>HMAC-SHA256 서명에 300초 만료·세션 바인딩·1회용을 겹쳤습니다. 인젝션당한 에이전트도 토큰을 위조하거나 지난 토큰을 다시 쓸 수 없습니다.</dd>
+      </dl>
+      <dl class="step-panel" id="sp-3" role="tabpanel" aria-labelledby="tab-3" hidden>
+        <dt>역할</dt>
+        <dd>결제 버튼을 누르기 직전에 거래를 이 상태로 옮깁니다.</dd>
+        <dt>기술적 고려</dt>
+        <dd>다섯 단계 중 유일하게 만료되지 않습니다. 돈이 이미 나갔을 수 있어 시간이 지났다고 없던 일로 만들 수 없기 때문입니다. 토큰도 검증 시점이 아니라 행위가 성공한 시점에 소진됩니다.</dd>
+      </dl>
+      <dl class="step-panel" id="sp-4" role="tabpanel" aria-labelledby="tab-4" hidden>
+        <dt>역할</dt>
+        <dd>결제 결과를 기록해 다음 구매의 근거로 남깁니다.</dd>
+        <dt>기술적 고려</dt>
+        <dd>재구매 주기와 수량 상한 판정이 이 기록을 입력으로 씁니다. 결제 뒤 중단된 거래도 지우지 않고 별도 상태로 남겨, 무엇이 실제로 결제됐는지 잃지 않습니다.</dd>
+      </dl>
+      <figcaption>단계를 누르면 그 단계가 맡은 일과 그렇게 설계한 이유가 나옵니다.</figcaption>
     </figure>
 
     <section class="block">
@@ -345,7 +417,7 @@
       <ul class="results">
         <li>
           <h4>실 결제 검증 및 직접 활용</h4>
-          <p>쿠팡·컬리·교보문고 세 곳에서 로그인부터 결제·주문내역 확인까지 실제 결제로 완주했고 보안 키패드를 통한 PIN 입력 경로까지 실측했습니다. 지금도 직접 쓰고 있습니다.</p>
+          <p>쿠X·컬X·교보문X 세 곳에서 로그인부터 결제·주문내역 확인까지 실제 결제로 완주했고 보안 키패드를 통한 PIN 입력 경로까지 실측했습니다. <span class="hl">지금도 직접 쓰고 있습니다.</span></p>
         </li>
         <li>
           <h4>잦은 재구매 상품 구매 자동화</h4>
@@ -602,5 +674,52 @@
   </div>
 </footer>
 
+
+<script>
+document.querySelectorAll('.carousel').forEach(function (c) {
+  var track = c.querySelector('.carousel-track');
+  var slides = Array.prototype.slice.call(track.children);
+  var dots = Array.prototype.slice.call(c.querySelectorAll('.carousel-nav button'));
+  var label = c.querySelector('.carousel-label');
+  dots.forEach(function (d, i) {
+    d.addEventListener('click', function () {
+      track.scrollTo({ left: slides[i].offsetLeft - slides[0].offsetLeft, behavior: 'smooth' });
+    });
+  });
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      var i = slides.indexOf(e.target);
+      dots.forEach(function (d, j) { d.setAttribute('aria-current', String(i === j)); });
+      if (label) label.textContent = dots[i].getAttribute('aria-label');
+    });
+  }, { root: track, threshold: 0.6 });
+  slides.forEach(function (sl) { io.observe(sl); });
+});
+
+document.querySelectorAll('.steps').forEach(function (bar) {
+  var tabs = Array.prototype.slice.call(bar.querySelectorAll('button'));
+  var panels = tabs.map(function (t) { return document.getElementById(t.getAttribute('aria-controls')); });
+  function select(i) {
+    tabs.forEach(function (t, j) { t.setAttribute('aria-selected', String(i === j)); });
+    panels.forEach(function (p, j) { p.hidden = i !== j; });
+    var t = tabs[i];
+    if (bar.scrollWidth > bar.clientWidth) {
+      bar.scrollTo({ left: t.offsetLeft - (bar.clientWidth - t.offsetWidth) / 2, behavior: 'smooth' });
+    }
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { select(i); });
+    t.addEventListener('keydown', function (e) {
+      var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!d) return;
+      e.preventDefault();
+      var n = (i + d + tabs.length) % tabs.length;
+      tabs[n].focus();
+      select(n);
+    });
+  });
+});
+</script>
 </body>
 </html>
